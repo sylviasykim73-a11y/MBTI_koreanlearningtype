@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Node (only relevant if a local static server / tooling is added later)
+node_modules/
+npm-debug.log*
+
+# Local Claude Code launch config (machine-specific dev server settings)
+.claude/launch.json

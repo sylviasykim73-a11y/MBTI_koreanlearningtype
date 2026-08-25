@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Korean Learning Type | 나의 한국어 학습 유형 찾기</title>
+<meta name="description" content="한국 대학에서 하루를 보내며 나에게 맞는 한국어 학습법을 찾아보는 교육용 테스트" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app" role="application">
+
+  <!-- ===================== LANDING ===================== -->
+  <section id="screen-landing" class="screen screen--active" aria-labelledby="landing-title">
+    <div class="landing">
+      <button id="sound-toggle" class="icon-btn sound-toggle" type="button" aria-pressed="true" aria-label="효과음 켜기/끄기">🔊</button>
+
+      <div class="landing__badge">🇰🇷 KOREAN LEARNING TYPE</div>
+      <h1 id="landing-title" class="landing__title">
+        나에게 맞는<br />한국어 학습법은?
+      </h1>
+      <p class="landing__sub-en">What's Your Korean Learning Type?</p>
+
+      <p class="landing__desc">
+        한국 대학에서 하루를 보내며<br />
+        나에게 맞는 한국어 공부법을 찾아보세요!
+      </p>
+      <p class="landing__desc-en">Spend a day on a Korean campus and discover how you learn Korean best.</p>
+
+      <div class="landing__meta">
+        <span>📝 24 Questions</span>
+        <span>⏱️ About 5 Minutes</span>
+      </div>
+
+      <label class="landing__nickname-label" for="nickname-input">닉네임 (선택 / optional)</label>
+      <input id="nickname-input" class="landing__nickname" type="text" maxlength="12" placeholder="예: 지민, Alex..." autocomplete="off" />
+
+      <button id="start-btn" class="btn btn--primary btn--large" type="button">START CAMPUS DAY →</button>
+
+      <p class="disclaimer">
+        <strong>이 테스트는 공식 MBTI 성격검사가 아닙니다.</strong><br />
+        한국어 학습 습관을 재미있게 돌아보고 자신에게 맞는 학습 방법을 탐색하기 위한 교육용 테스트입니다.
+        <br /><em>This is not an official MBTI personality assessment. It is an educational quiz to explore your Korean learning preferences.</em>
+      </p>
+
+      <p class="branding-footer" id="school-branding">SEOULTECH</p>
+    </div>
+  </section>
+
+  <!-- ===================== CHAPTER INTRO / BREAK ===================== -->
+  <section id="screen-chapter" class="screen" aria-labelledby="chapter-title">
+    <div class="chapter-card">
+      <div class="chapter-card__emoji" id="chapter-emoji">☀️</div>
+      <h2 id="chapter-title" class="chapter-card__title"></h2>
+      <p class="chapter-card__msg-ko" id="chapter-msg-ko"></p>
+      <p class="chapter-card__msg-en" id="chapter-msg-en"></p>
+      <button id="chapter-continue-btn" class="btn btn--primary" type="button">계속하기 →</button>
+    </div>
+  </section>
+
+  <!-- ===================== QUESTION ===================== -->
+  <section id="screen-question" class="screen" aria-labelledby="question-prompt">
+    <div class="question">
+      <header class="question__header">
+        <button id="back-btn" class="icon-btn" type="button" aria-label="이전 질문">← Back</button>
+        <div class="question__header-center">
+          <span id="chapter-tag" class="question__chapter-tag">☀️ MORNING</span>
+          <span id="question-counter" class="question__counter">Question 1 / 24</span>
+        </div>
+        <button id="sound-toggle-2" class="icon-btn" type="button" aria-pressed="true" aria-label="효과음 켜기/끄기">🔊</button>
+      </header>
+
+      <div class="question__progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+        <div class="question__progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="question__context">
+        <span class="question__context-emoji" id="context-emoji">☕</span>
+        <span class="question__context-time" id="context-time">12:30 · 학생식당</span>
+      </div>
+
+      <h2 id="question-prompt" class="question__prompt"></h2>
+      <p id="question-prompt-en" class="question__prompt-en"></p>
+
+      <div class="question__options">
+        <button class="option-btn" id="option-a" type="button">
+          <span class="option-btn__label">A</span>
+          <span class="option-btn__text" id="option-a-text"></span>
+          <span class="option-btn__text-en" id="option-a-text-en"></span>
+        </button>
+        <div class="question__vs">VS</div>
+        <button class="option-btn" id="option-b" type="button">
+          <span class="option-btn__label">B</span>
+          <span class="option-btn__text" id="option-b-text"></span>
+          <span class="option-btn__text-en" id="option-b-text-en"></span>
+        </button>
+      </div>
+
+      <div id="reaction-toast" class="reaction-toast" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===================== ANALYSIS ===================== -->
+  <section id="screen-analysis" class="screen" aria-labelledby="analysis-title">
+    <div class="analysis">
+      <div class="analysis__spinner" aria-hidden="true"></div>
+      <h2 id="analysis-title">🔍 Analyzing your Korean Learning Style...</h2>
+      <ul class="analysis__steps" id="analysis-steps"></ul>
+    </div>
+  </section>
+
+  <!-- ===================== RESULT ===================== -->
+  <section id="screen-result" class="screen" aria-labelledby="result-title">
+    <div class="result">
+
+      <!-- 1. Hero -->
+      <div class="result__hero">
+        <p class="result__hero-eyebrow">Your Korean Learning Type is...</p>
+        <div class="result__hero-emoji" id="result-emoji">🚀</div>
+        <div class="result__hero-code" id="result-code">ENFP</div>
+        <h1 id="result-title" class="result__hero-title"></h1>
+        <p class="result__hero-title-en" id="result-title-en"></p>
+        <p class="result__hero-tagline" id="result-tagline"></p>
+      </div>
+
+      <!-- 2. Axis chart -->
+      <div class="card">
+        <h3 class="card__title">📊 나의 학습 축</h3>
+        <div id="axis-chart" class="axis-chart"></div>
+      </div>
+
+      <!-- 3. Description -->
+      <div class="card">
+        <h3 class="card__title">💭 나는 이런 학습자예요</h3>
+        <p id="result-description" class="text-block"></p>
+        <p id="result-description-en" class="text-block text-block--en"></p>
+      </div>
+
+      <!-- 4 & 5. Strengths / Cautions -->
+      <div class="card">
+        <h3 class="card__title">💪 강점</h3>
+        <ul id="result-strengths" class="bullet-list"></ul>
+      </div>
+      <div class="card">
+        <h3 class="card__title">⚠️ 주의할 점</h3>
+        <ul id="result-cautions" class="bullet-list"></ul>
+      </div>
+
+      <!-- 6. Best 3 methods -->
+      <div class="card">
+        <h3 class="card__title">🏆 BEST 3 학습법</h3>
+        <ol id="result-best-methods" class="numbered-list"></ol>
+      </div>
+
+      <!-- 7. Skills -->
+      <div class="card">
+        <h3 class="card__title">🎧🗣📖✍️ 4기능 맞춤 추천</h3>
+        <div id="result-skills" class="skills-grid"></div>
+      </div>
+
+      <!-- 8/9. Difficult method / alternative -->
+      <div class="card card--warn">
+        <h3 class="card__title" id="difficult-title">😵 이렇게 공부하면 쉽게 지칠 수 있어요</h3>
+        <p id="result-difficult" class="text-block"></p>
+        <div class="alt-box">
+          <p class="alt-box__label">💡 Try this instead</p>
+          <p id="result-alternative" class="text-block"></p>
+        </div>
+      </div>
+
+      <!-- 10. Strongest preference -->
+      <div class="card card--highlight">
+        <h3 class="card__title" id="strongest-title">💬 Your Superpower</h3>
+        <p id="result-strongest" class="text-block"></p>
+      </div>
+
+      <!-- 11. Content recommendations -->
+      <div class="card">
+        <h3 class="card__title">🎬 추천 콘텐츠</h3>
+        <ul id="result-content" class="bullet-list"></ul>
+      </div>
+
+      <!-- 12. Campus mission -->
+      <div class="card card--mission">
+        <h3 class="card__title">🎯 TODAY'S CAMPUS MISSION</h3>
+        <p id="result-mission" class="text-block"></p>
+      </div>
+
+      <!-- 13. 7-day challenge -->
+      <div class="card">
+        <h3 class="card__title">🔥 7-Day Challenge</h3>
+        <button id="challenge-start-btn" class="btn btn--secondary" type="button">START MY 7-DAY CHALLENGE</button>
+        <ol id="challenge-list" class="challenge-list is-hidden"></ol>
+      </div>
+
+      <!-- 14/15. Buddy / fun combo -->
+      <div class="card">
+        <h3 class="card__title">❤️ BEST STUDY BUDDY</h3>
+        <p id="result-buddy" class="text-block"></p>
+      </div>
+      <div class="card">
+        <h3 class="card__title">🔥 FUN COMBO</h3>
+        <p id="result-combo" class="text-block"></p>
+        <p class="fine-print">For fun only — not a scientific compatibility score.</p>
+      </div>
+
+      <!-- 16. Meme -->
+      <div class="card card--meme">
+        <h3 class="card__title">😂 밈으로 보는 나</h3>
+        <pre id="result-meme" class="meme-text"></pre>
+      </div>
+
+      <!-- 17. Save / Share / Restart -->
+      <div class="share-panel">
+        <canvas id="share-canvas" width="1080" height="1350" class="is-hidden"></canvas>
+        <img id="share-preview" class="share-preview is-hidden" alt="공유용 결과 카드 미리보기" />
+        <div class="share-panel__buttons">
+          <button id="save-btn" class="btn btn--primary" type="button">📸 Save Result</button>
+          <button id="share-btn" class="btn btn--secondary" type="button">🔗 Share</button>
+          <button id="copy-link-btn" class="btn btn--secondary" type="button">📋 Copy Link</button>
+        </div>
+        <button id="restart-btn" class="btn btn--ghost" type="button">🔄 다시 검사하기 · Restart</button>
+      </div>
+
+      <p class="disclaimer">
+        <strong>이 테스트는 공식 MBTI 성격검사가 아닙니다.</strong>
+        <br /><em>This is not an official MBTI personality assessment.</em>
+      </p>
+    </div>
+  </section>
+
+  <div id="live-region" class="sr-only" aria-live="polite"></div>
+</div>
+
+<script src="js/questions.js"></script>
+<script src="js/profiles.js"></script>
+<script src="js/scoring.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/share.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
